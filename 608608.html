@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>神明的俯视</title>
+		<style>
+			
+			.wrap{
+				margin: 100px auto;
+				width: 300px;
+			}
+		
+			thead{
+				width: 400px;
+				/*height: 50px;*/
+				background-color: royalblue;
+			}
+			.aaa{
+				display: inline-block;
+				background-color: red;
+				text-align: center;
+				z-index: 999;
+				width: 300px;
+				height: 40px;
+				line-height: 40px;
+				color: #FFFAF0;
+				font-size: 12px;
+			}
+			tbody{
+				width: 400px;
+				background-color:darkgray;
+			}
+			
+			td{
+				width: 72px;
+				text-align: center;
+			}
+			tbody tr:hover{
+				background-color: floralwhite;
+			}
+			td:hover{
+				background-color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="wrap">
+		<table>
+			
+			<thead>
+				<a class="aaa">凡人们，膜拜我吧，给我个妹子，我会把技术教给你的</a>
+			<tr>
+				<th><input type="checkbox" id="j_cdAll" /></th>
+				<th>姓名</th>
+				<th>目前所在地</th>
+				<th>家乡</th>
+			</tr>
+			</thead>
+			
+			<tbody id="j_tb">
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>郭荣</td>
+				<td>赣州</td>
+				<td>赣州</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>王俊兵</td>
+				<td>广州</td>
+				<td>宜春</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>石海年</td>
+				<td>青海</td>
+				<td>青海</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>刘智睿</td>
+				<td>宜春</td>
+				<td>宜春</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>刘晋江</td>
+				<td>九江</td>
+				<td>九江</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>吴道彪</td>
+				<td>丰城</td>
+				<td>丰城</td>
+			</tr>
+			</tbody>
+		</table>
+		<!--失败  反选bug-->
+		<!--<input type="button" value="反选" id="btn" />-->
+		</div>
+		
+		
+<script>
+	//1 全选
+	//			1.1获取父chackbox,注册点击事件
+	var j_cdAll = document.getElementById('j_cdAll');
+	var j_tb = document.getElementById('j_tb');
+	var inputs = j_tb.getElementsByTagName('input');
+	j_cdAll.onclick = function() {
+		//	 1.2找到所有子的checkbox,让这些checkbox的状态跟父亲的checkbox保持一致
+
+		for(var i = 0; i < inputs.length; i++) {
+			var input = inputs[i];
+			if(input.type === 'checkbox') {
+				//			让这些checkbox的状态跟父亲的checkbox一样
+				input.checked = this.checked;
+
+			}
+			//判断所有的checked
+		}
+	}
+
+	//当点击子的checked，如果所有的子的checked都被选中了，让父的checked也被选中
+	for(var i = 0; i < inputs.length; i++) {
+		var input = inputs[i];
+		if(input.type !== 'checkbox') {
+			continue;
+		}
+		checkAllCheckBox();
+	}
+	//如果一个子的checked没有被选中，父的checked也不会被选中
+	
+function checkAllCheckBox() {
+	input.onclick = function() {
+			var isAllChecked = true;
+			for(var i = 0; i < inputs.length; i++) {
+				var input = inputs[i];
+				if(input.type !== 'checkbox') {
+					continue;
+				}
+				if(!input.checked) {
+					isAllChecked = false;
+				}
+			}
+			j_cdAll.checked = isAllChecked;
+
+		}
+}
+	//3 反选
+	var btn = document.getElementById('btn');
+	btn.onclick = function() {
+			for(var i = 0; i < inputs.length; i++) {
+				var input = inputs[i];
+		if(input.type !=='checkbox') {
+			continue;
+		}
+		input.checked = !input.checked;
+		input.onclick = function() {
+			var isAllChecked = true;
+			for(var i = 0; i < inputs.length; i++) {
+			var input = inputs[i];
+			if(input.type === 'checkbox') {
+				//			让这些checkbox的状态跟父亲的checkbox一样
+				input.checked = this.checked;
+
+			}
+			//判断所有的checked
+			j_cdAll.checked = isAllChecked;
+		}
+			
+
+		}
+		
+	}
+		}
+</script>
+	</body>
+</html>
